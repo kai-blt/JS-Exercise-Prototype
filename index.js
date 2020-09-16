@@ -39,9 +39,35 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+
+Person.prototype.eat = function(food) {
+  this.food = food;
+  if (this.stomach.length < 10) {
+    this.stomach.push(this.food);
+    return `${this.name} just ate ${this.food}. ${this.name} has eaten these foods thus far: ${this.stomach}.`
+  } else {
+    return `${this.name} can't eat anymore. They're too full! ${this.name} has eaten these foods thus far: ${this.stomach}.`
+  }
+}
+
+Person.prototype.poop = function() {
+  this.stomach.splice(0, this.stomach.length);
+}
+
+Person.prototype.toString = function() {
+  return `${this.name}, ${this.age}`
+}
+
+const Brendan = new Person('Brendan', '35');
+Brendan.eat('Steak');
+
+
+
 
 /*
   TASK 2
