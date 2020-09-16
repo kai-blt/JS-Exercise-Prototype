@@ -100,18 +100,19 @@ Car.prototype.drive = function(distance) {
   this.distance = distance;
   this.milesDriven = 0;
   while (this.distance > 0) { //While there's distance to cover, add to odometer, miles driven, check tank.
-    this.milesDriven++;  
-    this.odometer += 1;
-    this.distance--;
-    console.log('Driving...');
-    console.log(`Your odometer reads: ${this.odometer}`);
-    console.log(`Your tank reads: ${this.tank}`);
-    if (this.milesDriven === this.milesPerGallon){ //Have we reached the MPG? If so, take out a gallon of gas
-      this.tank -= 1;
-      this.milesDriven = 0;
-      if (this.tank <= 0) {
-        return `I ran out of fuel at ${this.odometer} miles!`; //You're stuck, print this message
-      }
+    if (this.tank > 0) {
+      this.milesDriven++;  
+      this.odometer++;
+      this.distance--;
+      console.log('Driving...');
+      console.log(`Your odometer reads: ${this.odometer}`);
+      console.log(`Your tank reads: ${this.tank}`);
+      if (this.milesDriven === this.milesPerGallon){ //Have we reached the MPG? If so, take out a gallon of gas
+        this.tank--;
+        this.milesDriven = 0;        
+      }     
+    } else {
+      return `I ran out of fuel at ${this.odometer} miles!`; //You're stuck, print this message
     } 
   }
 }
