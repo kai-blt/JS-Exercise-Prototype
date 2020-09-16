@@ -158,10 +158,10 @@ bigBaby.poop();
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. "this" refers to the window/console object when utilized within the global scope.
+  2. When an object's function is called using . notation (e.g. obj.doSomething()) any "this" keywords used refers back to the object itself. 
+  3. When an object is instatiated using a constructor function and the new keyword, "this" refers to that SPECIFIC instance created.
+  4. You can explicitly bind to a specific instance of an object and its data by using the .call and .apply methods. 
 */
 
 
