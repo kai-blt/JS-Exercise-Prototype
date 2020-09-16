@@ -83,9 +83,48 @@ Brendan.eat('Steak');
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+
+Car.prototype.fill = function(gallons) {
+  this.tank += gallons;
+  return `You just filled your ${this.model} with ${gallons} gallons of gasoline. You have ${this.tank} gallons left in the tank.`
+}
+
+Car.prototype.drive = function(distance) {
+  this.distance = distance;
+  this.milesDriven = 0;
+  while (this.distance > 0) {
+    this.milesDriven++;  
+    this.odometer += 1;
+    this.distance--;
+    console.log('Driving...');
+    console.log(`Your odometer reads: ${this.odometer}`);
+    console.log(`Your tank reads: ${this.tank}`);
+    if (this.milesDriven === this.milesPerGallon){
+      this.tank -= 1;
+      this.milesDriven = 0;
+      if (this.tank <= 0) {
+        return `I ran out of fuel at ${this.odometer} miles!`;
+      }
+    } 
+  }
+}
+
+const Sporty = new Car('Bugatti', 10);
+Sporty.fill(10);
+
+
+
+
+
+
+
+
 
 /*
   TASK 3
