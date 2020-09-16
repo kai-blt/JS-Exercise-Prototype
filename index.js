@@ -57,6 +57,7 @@ Person.prototype.eat = function(food) {
 
 Person.prototype.poop = function() {
   this.stomach.splice(0, this.stomach.length);
+  return `Ahh, much better...`
 }
 
 Person.prototype.toString = function() {
@@ -98,18 +99,18 @@ Car.prototype.fill = function(gallons) {
 Car.prototype.drive = function(distance) {
   this.distance = distance;
   this.milesDriven = 0;
-  while (this.distance > 0) {
+  while (this.distance > 0) { //While there's distance to cover, add to odometer, miles driven, check tank.
     this.milesDriven++;  
     this.odometer += 1;
     this.distance--;
     console.log('Driving...');
     console.log(`Your odometer reads: ${this.odometer}`);
     console.log(`Your tank reads: ${this.tank}`);
-    if (this.milesDriven === this.milesPerGallon){
+    if (this.milesDriven === this.milesPerGallon){ //Have we reached the MPG? If so, take out a gallon of gas
       this.tank -= 1;
       this.milesDriven = 0;
       if (this.tank <= 0) {
-        return `I ran out of fuel at ${this.odometer} miles!`;
+        return `I ran out of fuel at ${this.odometer} miles!`; //You're stuck, print this message
       }
     } 
   }
@@ -133,9 +134,25 @@ Sporty.fill(10);
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  this.name = name,
+  this.age = age,
+  this.favoriteToy = favoriteToy;
+  Person.call(this, name, age);
 }
+
+Baby.prototype = Object.create(Person.prototype); //Inherit methods from the person prototype!
+
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`
+}
+
+const bigBaby = new Baby('Big Baby', 1);
+bigBaby.poop();
+
+
+
+
 
 /* 
   TASK 4
